@@ -15,5 +15,8 @@ Install PiHole using the "curl -sSL https://install.pi-hole.net | bash" command
 
 When asked, select Cloudflare as DNS upstream
 You'll be presented with a password for your PiHole interface, save the details
-To change password after install use "sudo pihole -a -p" command 
+To change password after install use "sudo pihole setpassword" command 
 
+Log into your router and go to DHCP setings
+    Assign "Primary DNS" as your PiHole's IP
+    Reconnect all the devices
