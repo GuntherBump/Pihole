@@ -20,3 +20,25 @@ To change password after install use "sudo pihole setpassword" command
 Log into your router and go to DHCP setings
     Assign "Primary DNS" as your PiHole's IP
     Reconnect all the devices
+
+Tailscale Installation
+    SSH into PiHole and run the following command
+        curl -fsSL https://tailscale.com/install.sh | sh
+    Wait for installation to complete and terminal to say "sudo tailscale up"
+    Pi-Hole uses DNS servers configured within Linux as its upstream servers, where it will send DNS queries that it cannot answer on its own. 
+    Since we're going to make the Pi-Hole be our DNS server, we don't want Pi-Hole trying to use itself as its own upstream.
+        sudo tailscale up --accept-dns=false
+        The enter the provided URL into a browser to authenticate the tailscale link
+Set the PiHole as your DNS server
+    On the Tailscale admin page go to the DNS tab and gscroll to Nameservers.
+    Select "Add nameserver" and enter the tailscale IP for the PiHole
+    Select "overide DNS servers"
+Disable Key exiration
+    Go to devices page and select the elpises for the PiHole.
+    Select "disable key expiry"
+Set DNS Listen on all interfaces, permit all origins within PiHole admin page
+    Go to Admin page
+    Settings
+    DNS
+    "Advanced settings"
+    Listen on all interfaces, permit all origins
