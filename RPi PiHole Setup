@@ -1,0 +1,19 @@
+Download Offical Raspberry Pi Imager
+    https://www.raspberrypi.com/software/
+Install imager
+Install RPi OS Lite 64 bit into a Micro SD card
+Insert card into RPi and connect to router
+Boot RPi and login with credentials you set during imaging
+use "ip a" to pull IP address and to save
+Log into router and set the IP address as static
+
+SSH into PiHole on main computer
+    Open CMD
+    enter "ssh USERNAME@[RPi IP ADDRESS}"
+    run "sudo apt update && sudo apt upgrade -y" command to update and apply all the settings
+Install PiHole using the "curl -sSL https://install.pi-hole.net | bash" command
+
+When asked, select Cloudflare as DNS upstream
+You'll be presented with a password for your PiHole interface, save the details
+To change password after install use "sudo pihole -a -p" command 
+
