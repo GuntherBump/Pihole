@@ -33,7 +33,7 @@ Set the PiHole as your DNS server
     On the Tailscale admin page go to the DNS tab and gscroll to Nameservers.
     Select "Add nameserver" and enter the tailscale IP for the PiHole
     Select "overide DNS servers"
-Disable Key exiration
+Disable Key expiration
     Go to devices page and select the elpises for the PiHole.
     Select "disable key expiry"
 Set DNS Listen on all interfaces, permit all origins within PiHole admin page
@@ -42,3 +42,17 @@ Set DNS Listen on all interfaces, permit all origins within PiHole admin page
     DNS
     "Advanced settings"
     Listen on all interfaces, permit all origins
+Tailscale Subnet Routes
+    On the PiHole enter the below commands to enable IP forwarding
+        echo 'net.ipv4.ip_forward = 1' | sudo tee -a /etc/sysctl.d/99-tailscale.conf
+        echo 'net.ipv6.conf.all.forwarding = 1' | sudo tee -a /etc/sysctl.d/99-tailscale.conf
+        sudo sysctl -p /etc/sysctl.d/99-tailscale.conf
+    Then you need to advertise subnet routes with the below command. Make sure to replace the subnets in the example with the correct ones for your network.
+        sudo tailscale set --advertise-routes=192.0.2.0/24,198.51.100.0/24
+    Enable subnet routes fromn the Tailscale admin console
+        Open Machines
+        Locate the Subnets badge in the devices list
+        Select the device with the subnet property then go to the Subnets section
+        Select edit, under the Subnets toutes, select the routes to approve then select save
+        Verify conection through another Tailscale connected device with a ping command
+
